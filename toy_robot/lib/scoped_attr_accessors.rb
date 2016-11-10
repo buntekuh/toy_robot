@@ -16,8 +16,6 @@ module ScopedAttrAccessors
       private "#{name}="
     end
   end
-
-  end
 end
 
 
