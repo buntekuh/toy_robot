@@ -23,7 +23,6 @@ module ToyRobot
 		class ScopedAttrAccessorsTest < Minitest::Test
 		  def test_private_attr_accessor
 			  test_class = TestScopedAttrs.new
-		  	other_test_class = TestScopedAttrs.new
 		
 		  	assert_raises(NoMethodError) do
 		    	test_class.private_attribute
