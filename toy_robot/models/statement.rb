@@ -4,7 +4,7 @@ require './toy_robot/lib/scoped_attr_accessors'
 module ToyRobot
 	module Models
 		class Statement
-			private_attr_accessor :command, :parameters, :robot
+			private_attr_accessor :command, :parameters, :world
 		
 			UNDEFINED = 1
 			PLACE 		= 2
@@ -13,8 +13,8 @@ module ToyRobot
 			RIGHT			= 5
 			REPORT		= 6
 		
-			def initialize line, robot
-				self.robot = robot
+			def initialize line, world
+				self.world = world
 				parse line
 			end
 		

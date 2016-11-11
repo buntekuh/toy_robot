@@ -1,19 +1,13 @@
 require 'minitest/autorun'
 require './toy_robot/models/robot'
-require './toy_robot/models/table'
 
 
 module ToyRobot
   module Models
     class RobotTest < Minitest::Test
 			def setup
-        @table = Table.new
-        @robot = Robot.new @table
+        @robot = Robot.new
       end
-
-      def test_new
-				assert_equal @table, @robot.send(:table)
-			end
 
       def test_place
         @robot.place '3', '4', 'NORTH'

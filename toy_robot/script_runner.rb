@@ -2,19 +2,20 @@
 class ScriptRunner
 	require 'models/robot.rb'
 	require 'models/table.rb'
+	require 'models/world.rb'
   require 'models/statement.rb'
 	require 'lib/scoped_attr_accessors'	
 
-	private_attr :robot, :table
+	private_attr :world
 
 	def initialize
-		@table = Table.new
-		@robot = Robot.new table
+		@world = World.new
+		@world.table = Table.new
+		@world.robot = Robot.new
 	end
 
 	# each statement is executed in turn
 	def run_statement line
-		statement = Statement.new line, robot
-		statement.execute
+		Statement.new line, world
 	end
 end

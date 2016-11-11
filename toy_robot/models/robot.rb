@@ -1,5 +1,4 @@
 require './toy_robot/lib/scoped_attr_accessors'
-require './toy_robot/models/table'
 
 # This the model that stores the robot state
 module ToyRobot
@@ -10,10 +9,9 @@ module ToyRobot
 
 			DIRECTIONS = ['NORTH', 'EAST', 'SOUTH', 'WEST']
 			
-			private_attr_accessor :x, :y, :face, :table, :been_placed
+			private_attr_accessor :x, :y, :face, :been_placed
 		
-			def initialize table
-				self.table = table
+			def initialize
 				self.been_placed = nil
 			end
 		
