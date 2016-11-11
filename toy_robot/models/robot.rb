@@ -5,13 +5,56 @@ require './toy_robot/models/table'
 module ToyRobot
 	module Models
 		class Robot
-			private_attr_accessor :x, :y, :face, :table
+			class NotYetPlaced < StandardError; end
+			class FaceInvalid < StandardError; end
+
+			DIRECTIONS = ['NORTH', 'EAST', 'SOUTH', 'WEST']
+			
+			private_attr_accessor :x, :y, :face, :table, :been_placed
 		
 			def initialize table
 				self.table = table
+				self.been_placed = nil
 			end
 		
-			# TODO Implement methods for turn move, etc.
+			def place x, y, face
+				raise FaceInvalid unless DIRECTIONS.include? face
+				self.x = x.to_i
+				self.y = y.to_i
+				self.face = face
+				self.been_placed = true
+			end
+
+			def move
+				raise NotYetPlaced if been_placed.nil?
+				case face
+				when 'NORTH'
+					self.y += 1
+				when 'EAST'
+					self.x += 1					
+				when 'SOUTH'
+					self.y -= 1
+				when 'WEST'
+					self.x -= 1					
+				end
+			end
+
+			def turn_left
+				raise NotYetPlaced if been_placed.nil?
+				index = DIRECTIONS.index(face)
+				self.face = DIRECTIONS.rotate(-1)[index]
+			end
+
+			def turn_right
+				raise NotYetPlaced if been_placed.nil?
+				index = DIRECTIONS.index(face)
+				self.face = DIRECTIONS.rotate(1)[index]
+			end
+
+			def report
+				raise NotYetPlaced if been_placed.nil?
+				{ x: x, y: y, face: face }
+			end
 		
 		end
 	end
