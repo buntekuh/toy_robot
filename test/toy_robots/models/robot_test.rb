@@ -28,6 +28,21 @@ module ToyRobot
 				end
 			end
 
+			def test_projected_move
+				@robot.place '3', '4', 'NORTH'
+				assert_equal [3, 5], @robot.projected_move
+
+				@robot.place '3', '4', 'EAST'
+				assert_equal [4, 4], @robot.projected_move
+
+				@robot.place '3', '4', 'SOUTH'
+				assert_equal [3, 3], @robot.projected_move
+
+				@robot.place '3', '4', 'WEST'
+				assert_equal [2, 4], @robot.projected_move
+
+			end
+
 			def test_move_north
 				@robot.place '3', '4', 'NORTH'
 				@robot.move

@@ -25,16 +25,26 @@ module ToyRobot
 
 			def move
 				raise NotYetPlaced if been_placed.nil?
+				self.x, self.y = projected_move
+			end
+
+			# 
+			# Returns where the robot would move to if it did
+			# 
+			def projected_move
+				_x = x
+				_y = y
 				case face
 				when 'NORTH'
-					self.y += 1
+					_y += 1
 				when 'EAST'
-					self.x += 1					
+					_x += 1					
 				when 'SOUTH'
-					self.y -= 1
+					_y -= 1
 				when 'WEST'
-					self.x -= 1					
+					_x -= 1					
 				end
+				[_x, _y]
 			end
 
 			def turn_left
