@@ -24,7 +24,6 @@ module ToyRobot
 			end
 
 			def move
-				raise NotYetPlaced if been_placed.nil?
 				self.x, self.y = projected_move
 			end
 
@@ -32,6 +31,8 @@ module ToyRobot
 			# Returns where the robot would move to if it did
 			# 
 			def projected_move
+				raise NotYetPlaced if been_placed.nil?
+
 				_x = x
 				_y = y
 				case face
