@@ -11,13 +11,13 @@ module ToyRobot
         world.robot = Robot.new
         world.table = Table.new
 				
-				statement = Statement.new 'a 1, 2, 3', world
+				statement = Statement.new 'PLACE 1, 2, NORTH', world
 				assert_equal world, statement.send(:world)
 
-				a = rand(10)
-				b = rand(10)
-				c = rand(10)
-			 	assert_equal [a.to_s, b.to_s, c.to_s], Statement.new("PLACE #{a},#{b},#{c}", world).send(:parameters)
+				a = rand(5)
+				b = rand(5)
+				c = ToyRobot::Models::Robot::DIRECTIONS.sample
+			 	assert_equal [a.to_s, b.to_s, c.to_s], Statement.new("PLACE #{a},#{b},#{c} ", world).send(:parameters)
       end
 
     end
