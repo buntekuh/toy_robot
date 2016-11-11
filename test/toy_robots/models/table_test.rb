@@ -10,6 +10,12 @@ module ToyRobot
 				assert_equal 100, table.send(:height)
 			end
 
+			def test_if_dimensions_are_set_if_none_are_given
+				table = ::ToyRobot::Models::Table.new
+				assert_equal 5, table.send(:width)
+				assert_equal 5, table.send(:height)
+			end
+
 			def test_may_goto?
 				x = rand(10)
 				y = rand(10)
