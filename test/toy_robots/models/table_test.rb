@@ -17,8 +17,8 @@ module ToyRobot
 			end
 
 			def test_may_goto?
-				x = rand(10)
-				y = rand(10)
+				x = rand(5) + 1
+				y = rand(5) + 1
 				table = ::ToyRobot::Models::Table.new x, y
 				refute table.may_goto?(-1, 1)
 				refute table.may_goto?(1, -1)
