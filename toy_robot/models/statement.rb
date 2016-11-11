@@ -5,42 +5,55 @@ module ToyRobot
 	module Models
 		class Statement
 			private_attr_accessor :command, :parameters, :world
-		
-			UNDEFINED = 1
-			PLACE 		= 2
-			MOVE			= 3
-			LEFT			= 4
-			RIGHT			= 5
-			REPORT		= 6
-		
+				
 			def initialize line, world
 				self.world = world
-				parse line
+				run line
 			end
 		
-			def execute
-				# call method on robot
-			end
-
 			private
 			 # parse line and store as command integer and parameters array
-			def parse line
+			def run line
 				self.parameters = line.split(/[,\s]+/)
 				cmd = parameters.shift.downcase
 				self.command = 	case cmd
 												when 'place'
-													PLACE
+													place
 												when 'move'
-													MOVE	
+													move	
 												when 'left'
 													LEFT
 												when 'right'
-													RIGHT
+													left
 												when 'report'
-													REPORT
+													report
 												else
-													UNDEFINED
+													failure
 												end	
+			end
+
+			def place
+
+			end
+
+			def move
+
+			end
+
+			def left
+
+			end
+
+			def right
+
+			end
+
+			def report
+
+			end
+
+			def failure
+				'Syntax Error'
 			end
 		end
 	end
