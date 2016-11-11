@@ -1,4 +1,8 @@
 # This is just a bean that stores all the entities present in our game
-class World
-  attr_accessor :robot, :table
+module ToyRobot
+  module Models
+    class World
+      attr_accessor :robot, :table
+    end
+  end
 end
