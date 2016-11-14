@@ -1,13 +1,26 @@
 #!/usr/bin/env ruby
 
-exit 1
-# Command line interface
-# each line is input from the console
+ #Command line interface
+ #each line is input from the console
 
-#require './toy_runner/script_rurner.rb'
+require './toy_robot/script_runner'
 
-# sr = ScriptRunnter.new
-# while true
-#		read line from console
-#		sr.execute line
-#	end
+if ARGV.size > 1
+  puts "either pass a path to file or no parameter at all"
+	exit 1
+end
+
+if !ARGV[0].nil? 
+	if File.exist?(ARGV[0])
+		puts ToyRobot::ScriptRunner.run ARGV[0]
+	else
+		puts 'File could not be found'
+	end
+else
+	sr = ToyRobot::ScriptRunner.new
+	while true
+		line = gets.chomp
+		break if line == 'exit'
+		puts sr.run_statement line
+	end
+end
