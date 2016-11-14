@@ -1,55 +1,101 @@
 # This class represents a single line statement
 require './toy_robot/lib/scoped_attr_accessors'
+require './toy_robot/commands/place_command'
+require './toy_robot/commands/move_command'
+require './toy_robot/commands/left_command'
+require './toy_robot/commands/right_command'
+require './toy_robot/commands/report_command'
 
 module ToyRobot
 	module Models
 		class Statement
 			private_attr_accessor :command, :parameters, :world
 				
-			def initialize line, world
+			def initialize world
 				self.world = world
-				run line
+				self.parameters = Array.new
 			end
 		
-			private
+			def self.run line, world
+				statement = Statement.new world
+				statement.run line
+			end
+
 			 # parse line and store as command integer and parameters array
 			def run line
 				self.parameters = line.split(/[,\s]+/)
 				cmd = parameters.shift.downcase
-				self.command = 	case cmd
-												when 'place'
-													place
-												when 'move'
-													move	
-												when 'left'
-													LEFT
-												when 'right'
-													left
-												when 'report'
-													report
-												else
-													failure
-												end	
+				case cmd
+					when 'place'
+						place
+					when 'move'
+						move
+					when 'left'
+						left
+					when 'right'
+						right
+					when 'report'
+						report
+					else
+						failure
+					end	
 			end
+
+			private
 
 			def place
-
+				if parameters.size != 3
+					'error: Please enter x, y, face'
+				else
+					begin
+						::ToyRobot::Commands::PlaceCommand.execute world, *parameters
+						"I'm ready"
+					rescue ToyRobot::Models::Robot::FaceInvalid
+						'error: valid directions are NORTH, EAST, SOUTH or WEST'
+					rescue ::ToyRobot::Commands::PlaceCommand::CannotPlace
+						'error: x and y have to be between 0 and 4'
+          rescue ::ToyRobot::Commands::PlaceCommand::XYMustBeNumerical
+            'error: x and y have to be numbers'
+					end
+				end
 			end
 
-			def move
-
+      def move
+				begin
+					::ToyRobot::Commands::MoveCommand.execute world
+					'Moving'
+				rescue ToyRobot::Models::Robot::NotYetPlaced
+					'Error: I have not been placed yet.'
+        rescue ::ToyRobot::Commands::MoveCommand::CannotMove
+          "I'm afraid to fall."
+				end
 			end
 
-			def left
+      def left
+        begin
+          ::ToyRobot::Commands::LeftCommand.execute world
+          'Turning left'
+        rescue ToyRobot::Models::Robot::NotYetPlaced
+          'Error: I have not been placed yet.'
+        end
+      end
 
-			end
+      def right
+        begin
+          ::ToyRobot::Commands::RightCommand.execute world
+          'Turning right'
+        rescue ToyRobot::Models::Robot::NotYetPlaced
+          'Error: I have not been placed yet.'
+        end
+      end
 
-			def right
-
-			end
-
-			def report
-
+      def report
+        begin
+          ret = ::ToyRobot::Commands::ReportCommand.execute world
+          "I am at #{ret[:x]}, #{ret[:y]} facing #{ret[:face].capitalize}." 
+        rescue ToyRobot::Models::Robot::NotYetPlaced
+          'Error: I have not been placed yet.'
+        end
 			end
 
 			def failure

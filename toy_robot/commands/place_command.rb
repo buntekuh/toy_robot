@@ -1,6 +1,7 @@
 # Executes the place command
 #
 require './toy_robot/lib/scoped_attr_accessors'
+require './toy_robot/commands/base_command'
 
 module ToyRobot
   module Commands
