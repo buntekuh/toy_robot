@@ -27,6 +27,18 @@ module ToyRobot
         end
       end
 
+      def test_execute_fails_if_x_or_y_are_not_numerical
+        assert_raises (PlaceCommand::XYMustBeNumerical) do
+          PlaceCommand.execute @world, '3', 'y12', 'NORTH'
+        end
+
+        assert_raises (PlaceCommand::XYMustBeNumerical) do
+          PlaceCommand.execute @world, '13x', '4', 'NORTH'
+        end
+
+      end
+
+
       def test_execute_fails_if_position_is_not_on_table
         assert_raises (PlaceCommand::CannotPlace) do
           PlaceCommand.execute @world, '6', '6', 'NORTH'
