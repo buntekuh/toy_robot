@@ -38,7 +38,7 @@ module ToyRobot
 						report
 					else
 						failure
-					end	
+				end	
 			end
 
 			private
@@ -60,7 +60,7 @@ module ToyRobot
 				end
 			end
 
-      def move
+			def move
 				begin
 					::ToyRobot::Commands::MoveCommand.execute world
 					'Moving'
@@ -89,7 +89,7 @@ module ToyRobot
         end
       end
 
-      def report
+			def report
         begin
           ret = ::ToyRobot::Commands::ReportCommand.execute world
           "I am at #{ret[:x]}, #{ret[:y]} facing #{ret[:face].capitalize}" 

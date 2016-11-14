@@ -30,8 +30,8 @@ module ToyRobot
 				assert_equal 'error: Please enter x, y, face', Statement.run('Place, 1, 2, NORTH, 8', @world)
 			end
 
-      def test_place_fails_if_face_is_invalid
-        assert_equal 'error: valid directions are NORTH, EAST, SOUTH or WEST', Statement.run('Place, 1, 2, BLUMM', @world)
+			def test_place_fails_if_face_is_invalid
+				assert_equal 'error: valid directions are NORTH, EAST, SOUTH or WEST', Statement.run('Place, 1, 2, BLUMM', @world)
 			end
 
       def test_place_fails_if_cannot_place_robot
