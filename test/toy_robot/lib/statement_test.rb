@@ -2,15 +2,15 @@ require 'minitest/autorun'
 require './toy_robot/models/robot'
 require './toy_robot/models/table'
 require './toy_robot/models/world'
-require './toy_robot/models/statement'
+require './toy_robot/lib/statement'
 
 module ToyRobot
-  module Models
+  module Lib
     class StatementTest < Minitest::Test
 			def setup
-        @world = World.new
-        @world.robot = Robot.new
-        @world.table = Table.new
+        @world = ToyRobot::Models::World.new
+        @world.robot = ToyRobot::Models::Robot.new
+        @world.table = ToyRobot::Models::Table.new
 			end
       def test_new
 				statement = Statement.new @world

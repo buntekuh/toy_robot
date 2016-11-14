@@ -7,7 +7,7 @@ require './toy_robot/commands/right_command'
 require './toy_robot/commands/report_command'
 
 module ToyRobot
-	module Models
+	module Lib
 		class Statement
 			private_attr_accessor :command, :parameters, :world
 				
