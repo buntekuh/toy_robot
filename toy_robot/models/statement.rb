@@ -65,9 +65,9 @@ module ToyRobot
 					::ToyRobot::Commands::MoveCommand.execute world
 					'Moving'
 				rescue ToyRobot::Models::Robot::NotYetPlaced
-					'Error: I have not been placed yet.'
+					'Error: I have not been placed yet'
         rescue ::ToyRobot::Commands::MoveCommand::CannotMove
-          "I'm afraid to fall."
+          "I'm afraid to fall"
 				end
 			end
 
@@ -76,7 +76,7 @@ module ToyRobot
           ::ToyRobot::Commands::LeftCommand.execute world
           'Turning left'
         rescue ToyRobot::Models::Robot::NotYetPlaced
-          'Error: I have not been placed yet.'
+          'Error: I have not been placed yet'
         end
       end
 
@@ -85,16 +85,16 @@ module ToyRobot
           ::ToyRobot::Commands::RightCommand.execute world
           'Turning right'
         rescue ToyRobot::Models::Robot::NotYetPlaced
-          'Error: I have not been placed yet.'
+          'Error: I have not been placed yet'
         end
       end
 
       def report
         begin
           ret = ::ToyRobot::Commands::ReportCommand.execute world
-          "I am at #{ret[:x]}, #{ret[:y]} facing #{ret[:face].capitalize}." 
+          "I am at #{ret[:x]}, #{ret[:y]} facing #{ret[:face].capitalize}" 
         rescue ToyRobot::Models::Robot::NotYetPlaced
-          'Error: I have not been placed yet.'
+          'Error: I have not been placed yet'
         end
 			end
 

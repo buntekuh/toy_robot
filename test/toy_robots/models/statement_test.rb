@@ -50,12 +50,12 @@ module ToyRobot
 			end
 
       def test_move_fails_unless_placed
-        assert_equal 'Error: I have not been placed yet.', Statement.run('MOVE', @world)
+        assert_equal 'Error: I have not been placed yet', Statement.run('MOVE', @world)
       end
 
       def test_move_fails_if_cannot_move
 				Statement.run('Place, 2, 4, NORTH', @world)
-        assert_equal "I'm afraid to fall.", Statement.run('MOVE', @world)
+        assert_equal "I'm afraid to fall", Statement.run('MOVE', @world)
       end
 
 
@@ -65,7 +65,7 @@ module ToyRobot
       end
 
       def test_left_fails_unless_placed
-        assert_equal 'Error: I have not been placed yet.', Statement.run('LEFT', @world)
+        assert_equal 'Error: I have not been placed yet', Statement.run('LEFT', @world)
       end
 
       def test_right
@@ -74,18 +74,21 @@ module ToyRobot
       end
 
       def test_right_fails_unless_placed
-        assert_equal 'Error: I have not been placed yet.', Statement.run('RIGHT', @world)
+        assert_equal 'Error: I have not been placed yet', Statement.run('RIGHT', @world)
       end
 
       def test_report
         Statement.run('Place, 1, 2, NORTH', @world)
-        assert_equal 'I am at 1, 2 facing North.', Statement.run('Report', @world)
+        assert_equal 'I am at 1, 2 facing North', Statement.run('Report', @world)
       end
 
       def test_report_fails_unless_placed
-        assert_equal 'Error: I have not been placed yet.', Statement.run('Report', @world)
+        assert_equal 'Error: I have not been placed yet', Statement.run('Report', @world)
       end
 
+			def test_fails_if_no_valid_command
+				assert_equal 'Syntax Error', Statement.run('Foo Bar', @world)
+			end
 
     end
   end
