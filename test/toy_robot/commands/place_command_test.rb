@@ -20,6 +20,11 @@ module ToyRobot
         assert_equal 4, @world.robot.send(:y)
         assert_equal 'NORTH', @world.robot.send(:face)
       end
+			
+			def test_allow_lower_case_face
+				PlaceCommand.execute @world, '3', '4', 'north'
+				assert_equal 'NORTH', @world.robot.send(:face)
+			end
 
       def test_execute_fails_if_face_is_invalid
         assert_raises (ToyRobot::Models::Robot::FaceInvalid) do

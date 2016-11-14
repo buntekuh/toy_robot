@@ -14,7 +14,7 @@ module ToyRobot
         self.world = world
         self.x = x
         self.y = y
-        self.face = face
+        self.face = face.upcase
       end
 
       def execute
