@@ -18,7 +18,7 @@ module ToyRobot
       end
  			
 			def test_place
-				assert_equal  "I'm ready", Statement.run('PLACE 1, 2, NORTH', @world)
+				Statement.run('PLACE 1, 2, NORTH', @world)
 			
         assert_equal 1, @world.robot.send(:x)
         assert_equal 2, @world.robot.send(:y)
@@ -46,7 +46,9 @@ module ToyRobot
 
 			def test_move
 				Statement.run('Place, 1, 2, NORTH', @world)
-				assert_equal 'Moving', Statement.run('MOVE', @world)		
+				Statement.run('MOVE', @world)		
+				assert_equal 1, @world.robot.send(:x)
+				assert_equal 3, @world.robot.send(:y)
 			end
 
       def test_move_fails_unless_placed
@@ -55,13 +57,17 @@ module ToyRobot
 
       def test_move_fails_if_cannot_move
 				Statement.run('Place, 2, 4, NORTH', @world)
-        assert_equal "I'm afraid to fall", Statement.run('MOVE', @world)
+        Statement.run('MOVE', @world)
+        assert_equal 2, @world.robot.send(:x)
+        assert_equal 4, @world.robot.send(:y)
+
       end
 
 
       def test_left
         Statement.run('Place, 1, 2, NORTH', @world)
-        assert_equal 'Turning left', Statement.run('LEFT', @world)
+        Statement.run('LEFT', @world)
+				assert_equal 'WEST', @world.robot.send(:face)
       end
 
       def test_left_fails_unless_placed
@@ -70,7 +76,8 @@ module ToyRobot
 
       def test_right
         Statement.run('Place, 1, 2, NORTH', @world)
-        assert_equal 'Turning right', Statement.run('RIGHT', @world)
+        Statement.run('RIGHT', @world)
+				assert_equal 'EAST', @world.robot.send(:face)
       end
 
       def test_right_fails_unless_placed
@@ -79,7 +86,7 @@ module ToyRobot
 
       def test_report
         Statement.run('Place, 1, 2, NORTH', @world)
-        assert_equal 'I am at 1, 2 facing North', Statement.run('Report', @world)
+        assert_equal '1,2,NORTH', Statement.run('Report', @world)
       end
 
       def test_report_fails_unless_placed
@@ -89,7 +96,6 @@ module ToyRobot
 			def test_fails_if_no_valid_command
 				assert_equal 'Syntax Error', Statement.run('Foo Bar', @world)
 			end
-
     end
   end
 end

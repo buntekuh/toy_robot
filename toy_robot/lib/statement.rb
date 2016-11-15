@@ -49,7 +49,7 @@ module ToyRobot
 				else
 					begin
 						::ToyRobot::Commands::PlaceCommand.execute world, *parameters
-						"I'm ready"
+					nil	
 					rescue ToyRobot::Models::Robot::FaceInvalid
 						'error: valid directions are NORTH, EAST, SOUTH or WEST'
 					rescue ::ToyRobot::Commands::PlaceCommand::CannotPlace
@@ -63,18 +63,18 @@ module ToyRobot
 			def move
 				begin
 					::ToyRobot::Commands::MoveCommand.execute world
-					'Moving'
+					nil
 				rescue ToyRobot::Models::Robot::NotYetPlaced
 					'Error: I have not been placed yet'
         rescue ::ToyRobot::Commands::MoveCommand::CannotMove
-          "I'm afraid to fall"
+          nil
 				end
 			end
 
       def left
         begin
           ::ToyRobot::Commands::LeftCommand.execute world
-          'Turning left'
+          nil
         rescue ToyRobot::Models::Robot::NotYetPlaced
           'Error: I have not been placed yet'
         end
@@ -83,7 +83,7 @@ module ToyRobot
       def right
         begin
           ::ToyRobot::Commands::RightCommand.execute world
-          'Turning right'
+          nil
         rescue ToyRobot::Models::Robot::NotYetPlaced
           'Error: I have not been placed yet'
         end
@@ -92,7 +92,7 @@ module ToyRobot
 			def report
         begin
           ret = ::ToyRobot::Commands::ReportCommand.execute world
-          "I am at #{ret[:x]}, #{ret[:y]} facing #{ret[:face].capitalize}" 
+          "#{ret[:x]},#{ret[:y]},#{ret[:face]}" 
         rescue ToyRobot::Models::Robot::NotYetPlaced
           'Error: I have not been placed yet'
         end

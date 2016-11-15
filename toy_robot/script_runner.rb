@@ -22,8 +22,8 @@ module ToyRobot
 			out = ''
 		  world =  ScriptRunner.createWorld
 			File.open(filename).each do |line|
-	    	out << ToyRobot::Lib::Statement.run(line.strip, world)
-				out << "\n"
+	    	output =  ToyRobot::Lib::Statement.run(line.strip, world)
+				out << output << "\n" unless output.nil?
 			end
 			out
 		end
